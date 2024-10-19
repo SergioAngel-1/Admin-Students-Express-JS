@@ -1,0 +1,8 @@
+<h2>Lista de Cursos</h2>
+<ul class="list-group">
+  <% cursos.forEach(curso => { %>
+  <li class="list-group-item">
+    <a href="/curso/<%= curso.curso %>"><%= curso.curso %></a>
+  </li>
+  <% }); %>
+</ul>
