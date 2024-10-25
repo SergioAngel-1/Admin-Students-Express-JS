@@ -3,7 +3,8 @@
   "private": true,
   "scripts": {
     "start": "node src/index.js",
-    "dev": "nodemon src/index.js"
+    "dev": "nodemon src/index.js",
+    "build": "mkdir -p dist && cp -r public/* dist/ && cp src/views/layouts/main.ejs dist/index.html"
   },
   "dependencies": {
     "ejs": "^3.1.9",
