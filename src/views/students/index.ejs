@@ -1,0 +1,295 @@
+<div class="mb-6 flex justify-between items-center">
+  <h2 class="text-xl font-medium text-gray-800 dark:text-white">Estudiantes</h2>
+  <button
+    onclick="showModal('addModal')"
+    class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-blue-600 transition-colors"
+  >
+    Agregar Estudiante
+  </button>
+</div>
+
+<div
+  class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border dark:border-gray-700"
+>
+  <div class="overflow-x-auto">
+    <table class="w-full">
+      <thead>
+        <tr class="text-left border-b dark:border-gray-700">
+          <th
+            class="px-6 py-3 text-xs font-medium text-gray-500 dark:text-gray-400 uppercase"
+          >
+            Nombre
+          </th>
+          <th
+            class="px-6 py-3 text-xs font-medium text-gray-500 dark:text-gray-400 uppercase"
+          >
+            Email
+          </th>
+          <th
+            class="px-6 py-3 text-xs font-medium text-gray-500 dark:text-gray-400 uppercase"
+          >
+            Grado
+          </th>
+          <th
+            class="px-6 py-3 text-xs font-medium text-gray-500 dark:text-gray-400 uppercase"
+          >
+            Acciones
+          </th>
+        </tr>
+      </thead>
+      <tbody class="divide-y dark:divide-gray-700">
+        <% students.forEach(student => { %>
+        <tr class="hover:bg-gray-50 dark:hover:bg-gray-700/50">
+          <td class="px-6 py-4 text-gray-800 dark:text-gray-200">
+            <%= student.name %>
+          </td>
+          <td class="px-6 py-4 text-gray-800 dark:text-gray-200">
+            <%= student.email %>
+          </td>
+          <td class="px-6 py-4 text-gray-800 dark:text-gray-200">
+            <%= student.grade %>
+          </td>
+          <td class="px-6 py-4 space-x-2">
+            <button
+              onclick="editStudent(<%= JSON.stringify(student) %>)"
+              class="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
+            >
+              Editar
+            </button>
+            <button
+              onclick="confirmDelete(<%= student.id %>, '<%= student.name %>')"
+              class="text-red-600 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300"
+            >
+              Eliminar
+            </button>
+          </td>
+        </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Add Student Modal -->
+<dialog
+  id="addModal"
+  class="p-0 rounded-lg shadow-xl w-full max-w-md bg-white dark:bg-gray-800"
+>
+  <div class="p-6">
+    <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-4">
+      Agregar Nuevo Estudiante
+    </h3>
+    <form action="/students" method="POST">
+      <div class="space-y-4">
+        <div>
+          <label
+            class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+            for="name"
+            >Nombre</label
+          >
+          <input
+            class="w-full px-3 py-2 border dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary dark:bg-gray-700 dark:text-white"
+            type="text"
+            id="name"
+            name="name"
+            required
+          />
+        </div>
+        <div>
+          <label
+            class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+            for="email"
+            >Email</label
+          >
+          <input
+            class="w-full px-3 py-2 border dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary dark:bg-gray-700 dark:text-white"
+            type="email"
+            id="email"
+            name="email"
+            required
+          />
+        </div>
+        <div>
+          <label
+            class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+            for="grade"
+            >Grado</label
+          >
+          <input
+            class="w-full px-3 py-2 border dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary dark:bg-gray-700 dark:text-white"
+            type="text"
+            id="grade"
+            name="grade"
+            required
+          />
+        </div>
+      </div>
+      <div class="mt-6 flex justify-end space-x-3">
+        <button
+          type="button"
+          onclick="closeModal('addModal')"
+          class="px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg"
+        >
+          Cancelar
+        </button>
+        <button
+          type="submit"
+          class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-blue-600"
+        >
+          Guardar
+        </button>
+      </div>
+    </form>
+  </div>
+</dialog>
+
+<!-- Edit Student Modal -->
+<dialog
+  id="editModal"
+  class="p-0 rounded-lg shadow-xl w-full max-w-md bg-white dark:bg-gray-800"
+>
+  <div class="p-6">
+    <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-4">
+      Editar Estudiante
+    </h3>
+    <form id="editForm" method="POST">
+      <input type="hidden" name="_method" value="PUT" />
+      <div class="space-y-4">
+        <div>
+          <label
+            class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+            for="editName"
+            >Nombre</label
+          >
+          <input
+            class="w-full px-3 py-2 border dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary dark:bg-gray-700 dark:text-white"
+            type="text"
+            id="editName"
+            name="name"
+            required
+          />
+        </div>
+        <div>
+          <label
+            class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+            for="editEmail"
+            >Email</label
+          >
+          <input
+            class="w-full px-3 py-2 border dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary dark:bg-gray-700 dark:text-white"
+            type="email"
+            id="editEmail"
+            name="email"
+            required
+          />
+        </div>
+        <div>
+          <label
+            class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+            for="editGrade"
+            >Grado</label
+          >
+          <input
+            class="w-full px-3 py-2 border dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary dark:bg-gray-700 dark:text-white"
+            type="text"
+            id="editGrade"
+            name="grade"
+            required
+          />
+        </div>
+      </div>
+      <div class="mt-6 flex justify-end space-x-3">
+        <button
+          type="button"
+          onclick="closeModal('editModal')"
+          class="px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg"
+        >
+          Cancelar
+        </button>
+        <button
+          type="submit"
+          class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-blue-600"
+        >
+          Actualizar
+        </button>
+      </div>
+    </form>
+  </div>
+</dialog>
+
+<!-- Delete Confirmation Modal -->
+<dialog
+  id="deleteModal"
+  class="p-0 rounded-lg shadow-xl w-full max-w-md bg-white dark:bg-gray-800"
+>
+  <div class="p-6">
+    <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-2">
+      Confirmar Eliminación
+    </h3>
+    <p class="text-gray-500 dark:text-gray-400 mb-4">
+      ¿Estás seguro de que deseas eliminar a
+      <span id="deleteStudentName"></span>?
+    </p>
+    <form id="deleteForm" method="POST">
+      <input type="hidden" name="_method" value="DELETE" />
+      <div class="flex justify-end space-x-3">
+        <button
+          type="button"
+          onclick="closeModal('deleteModal')"
+          class="px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg"
+        >
+          Cancelar
+        </button>
+        <button
+          type="submit"
+          class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
+        >
+          Eliminar
+        </button>
+      </div>
+    </form>
+  </div>
+</dialog>
+
+<script>
+  function showModal(modalId) {
+    const modal = document.getElementById(modalId);
+    modal.showModal();
+  }
+
+  function closeModal(modalId) {
+    const modal = document.getElementById(modalId);
+    modal.close();
+  }
+
+  function editStudent(student) {
+    const form = document.getElementById("editForm");
+    form.action = `/students/${student.id}`;
+    document.getElementById("editName").value = student.name;
+    document.getElementById("editEmail").value = student.email;
+    document.getElementById("editGrade").value = student.grade;
+    showModal("editModal");
+  }
+
+  function confirmDelete(id, name) {
+    const form = document.getElementById("deleteForm");
+    form.action = `/students/${id}`;
+    document.getElementById("deleteStudentName").textContent = name;
+    showModal("deleteModal");
+  }
+
+  // Close modals when clicking outside
+  document.querySelectorAll("dialog").forEach((dialog) => {
+    dialog.addEventListener("click", (e) => {
+      const rect = dialog.getBoundingClientRect();
+      const isInDialog =
+        rect.top <= e.clientY &&
+        e.clientY <= rect.top + rect.height &&
+        rect.left <= e.clientX &&
+        e.clientX <= rect.left + rect.width;
+      if (!isInDialog) {
+        dialog.close();
+      }
+    });
+  });
+</script>

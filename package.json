@@ -1,19 +1,19 @@
 {
-    "name": "node-express-ejs-crud",
-    "version": "1.0.0",
-    "description": "Aplicación web con CRUD de alumnos",
-    "main": "app.js",
-    "scripts": {
-        "start": "node app.js",
-        "dev": "nodemon app.js"
-    },
-    "dependencies": {
-        "body-parser": "^1.19.0",
-        "ejs": "^3.1.6",
-        "express": "^4.17.1",
-        "sqlite3": "^5.1.7"
-    },
-    "devDependencies": {
-        "nodemon": "^2.0.12"
-    }
+  "name": "student-management",
+  "private": true,
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "dependencies": {
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "express-ejs-layouts": "^2.5.1",
+    "method-override": "^3.0.0",
+    "student-management": "file:"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2",
+    "tailwindcss": "^3.4.0"
+  }
 }

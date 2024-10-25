@@ -1,78 +1,50 @@
-# Sistema de Gestión de Alumnos - Universidad San Buenaventura
+# Sistema de Gestión de Estudiantes
 
-Este proyecto es un sistema de gestión de alumnos desarrollado con Node.js, Express, y SQLite. Permite realizar operaciones CRUD (Crear, Leer, Actualizar, Eliminar) sobre los registros de alumnos, así como visualizar los alumnos por cursos.
+Una aplicación web minimalista para la gestión de estudiantes construida con Express.js, EJS y Tailwind CSS.
 
 ## Características
 
-- Listado de alumnos
-- Agregar nuevos alumnos
-- Editar información de alumnos existentes
-- Eliminar alumnos
-- Ver lista de cursos
-- Ver alumnos por curso
+- ✨ Interfaz minimalista y moderna
+- 🌓 Modo oscuro/claro
+- 💻 Diseño responsivo
+- ✅ Operaciones CRUD completas
+- 🎨 Estilizado con Tailwind CSS
+- 🔄 Modales interactivos
 
-## Tecnologías utilizadas
+## Tecnologías
 
 - Node.js
 - Express.js
-- SQLite (base de datos en memoria)
-- EJS (motor de plantillas)
-- Bootstrap (para el diseño)
-- Font Awesome (para los iconos)
+- EJS (Motor de plantillas)
+- Tailwind CSS
+- Method Override
 
-## Estructura del proyecto
+## Inicio Rápido
 
-- `app.js`: Archivo principal del servidor
-- `views/`: Directorio con las plantillas EJS
-  - `layout.ejs`: Plantilla principal
-  - `inicio.ejs`: Página de inicio
-  - `crud.ejs`: Lista y gestión de alumnos
-  - `agregar.ejs`: Formulario para agregar alumnos
-  - `editar.ejs`: Formulario para editar alumnos
-  - `cursos.ejs`: Lista de cursos
-  - `curso.ejs`: Alumnos por curso
-- `public/`: Directorio para archivos estáticos (imágenes, CSS, etc.)
+1. Instalar dependencias:
+```bash
+npm install
+```
 
-## Instalación
+2. Iniciar el servidor:
+```bash
+npm run dev
+```
 
-1. Clona este repositorio:
-   ```
-   git clone https://github.com/tu-usuario/sistema-gestion-alumnos.git
-   ```
+3. Abrir el navegador en `http://localhost:3000`
 
-2. Navega al directorio del proyecto:
-   ```
-   cd sistema-gestion-alumnos
-   ```
+## Estructura del Proyecto
 
-3. Instala las dependencias:
-   ```
-   npm install
-   ```
-
-4. Inicia el servidor de desarrollo:
-   ```
-   npm run dev
-   ```
-
-5. Abre tu navegador y visita `http://localhost:3000`
-
-## Uso
-
-- La página de inicio muestra una bienvenida al sistema.
-- En la sección "CRUD" puedes ver la lista de alumnos, agregar nuevos, editar o eliminar existentes.
-- En la sección "Cursos" puedes ver la lista de cursos disponibles y los alumnos inscritos en cada uno.
-
-## Contribuir
-
-Si deseas contribuir a este proyecto, por favor:
-
-1. Haz un fork del repositorio
-2. Crea una nueva rama (`git checkout -b feature/AmazingFeature`)
-3. Haz commit de tus cambios (`git commit -m 'Add some AmazingFeature'`)
-4. Haz push a la rama (`git push origin feature/AmazingFeature`)
-5. Abre un Pull Request
+```
+src/
+├── index.js          # Punto de entrada
+├── models/           # Modelos de datos
+├── routes/           # Rutas de la aplicación
+└── views/            # Plantillas EJS
+    ├── layouts/      # Layouts compartidos
+    └── students/     # Vistas de estudiantes
+```
 
 ## Licencia
 
-Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más detalles.
+MIT
